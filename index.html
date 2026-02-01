@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wa Support X</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📱</text></svg>">
+    <style>
+        :root {
+            --primary: #075e54;
+            --secondary: #128c7e;
+            --accent: #25d366;
+            --dark: #0c1b1a;
+            --darker: #070f0e;
+            --light: #e6f4f1;
+            --danger: #dc3545;
+            --success: #28a745;
+            --gray: #2a3e3c;
+            --email: #ea4335;
+            --business: #25d366;
+            --messenger: #128c7e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Background Animation */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            opacity: 0.3;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(37, 211, 102, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-1000px) rotate(720deg); }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(7, 30, 26, 0.9);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid var(--gray);
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.8s ease-out;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .subtitle {
+            color: #88c9bf;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .version {
+            display: inline-block;
+            background: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* System Card */
+        .system-card {
+            background: rgba(12, 27, 26, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--gray);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .system-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.2);
+        }
+
+        .system-card.banned {
+            border-top: 4px solid var(--danger);
+        }
+
+        .system-card.unbanned {
+            border-top: 4px solid var(--success);
+        }
+
+        .system-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(42, 62, 60, 0.5);
+        }
+
+        .system-card h2 i {
+            font-size: 1.5rem;
+        }
+
+        /* Platform Selection */
+        .platform-selection {
+            margin-bottom: 25px;
+        }
+
+        .platform-selection label {
+            display: block;
+            margin-bottom: 12px;
+            color: #a3d9d1;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .platform-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .platform-btn {
+            flex: 1;
+            min-width: 160px;
+            padding: 15px;
+            background: rgba(42, 62, 60, 0.5);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            color: var(--light);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        .platform-btn:hover {
+            background: rgba(37, 211, 102, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .platform-btn.active {
+            background: rgba(37, 211, 102, 0.2);
+            border-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);
+        }
+
+        .platform-btn.business {
+            border-color: var(--business);
+        }
+
+        .platform-btn.messenger {
+            border-color: var(--messenger);
+        }
+
+        /* Phone Input */
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 12px;
+            color: #a3d9d1;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .phone-input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .country-code {
+            padding: 15px 20px;
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid var(--gray);
+            border-right: none;
+            border-radius: 10px 0 0 10px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .phone-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--gray);
+            border-left: none;
+            border-radius: 0 10px 10px 0;
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .phone-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
+        }
+
+        /* Report Selection */
+        .report-selection {
+            margin-bottom: 25px;
+        }
+
+        .report-selection label {
+            display: block;
+            margin-bottom: 12px;
+            color: #a3d9d1;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(42, 62, 60, 0.3);
+            border-radius: 10px;
+            border: 1px solid var(--gray);
+        }
+
+        @media (max-width: 768px) {
+            .report-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .report-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .report-btn {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            color: var(--light);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .report-btn:hover {
+            background: rgba(37, 211, 102, 0.1);
+            border-color: var(--accent);
+        }
+
+        .report-btn.active {
+            background: rgba(37, 211, 102, 0.2);
+            border-color: var(--accent);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .report-btn.banned {
+            color: #ff6b6b;
+        }
+
+        .report-btn.banned.active {
+            background: rgba(220, 53, 69, 0.2);
+            border-color: var(--danger);
+            color: #ff6b6b;
+        }
+
+        .report-btn.unbanned {
+            color: #68d391;
+        }
+
+        .report-btn.unbanned.active {
+            background: rgba(40, 167, 69, 0.2);
+            border-color: var(--success);
+            color: #68d391;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-execute {
+            flex: 2;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--danger), #c82333);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-execute:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(220, 53, 69, 0.4);
+        }
+
+        .btn-execute.success {
+            background: linear-gradient(135deg, var(--success), #1e7e34);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-execute.success:hover {
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-preview {
+            flex: 1;
+            padding: 18px;
+            background: linear-gradient(135deg, #6c757d, #495057);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-preview:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+        }
+
+        /* Status Panel */
+        .status-panel {
+            background: rgba(7, 15, 14, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 1px solid var(--gray);
+            animation: fadeIn 1s ease-out;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .status-header h3 {
+            font-size: 1.6rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-badge {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(42, 62, 60, 0.3);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .status-item:hover {
+            background: rgba(42, 62, 60, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .status-item .value {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .status-item .value.active {
+            color: var(--accent);
+        }
+
+        .status-item .value.inactive {
+            color: #ff6b6b;
+        }
+
+        /* Log Console */
+        .log-console {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            border: 1px solid var(--gray);
+        }
+
+        .log-entry {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #88c9bf;
+        }
+
+        .log-entry.success {
+            color: var(--accent);
+        }
+
+        .log-entry.email {
+            color: var(--email);
+        }
+
+        .log-entry.error {
+            color: #ff6b6b;
+        }
+
+        .log-entry.warning {
+            color: #ffc107;
+        }
+
+        /* Email Modal */
+        .email-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .email-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .email-content {
+            background: var(--dark);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid var(--accent);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .email-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .email-header h3 {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .email-body {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            line-height: 1.6;
+            color: #a3d9d1;
+            font-size: 0.9rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .email-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn-send-email {
+            flex: 2;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--email), #d14836);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-send-email:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(234, 67, 53, 0.4);
+        }
+
+        .btn-copy {
+            flex: 1;
+            padding: 15px;
+            background: linear-gradient(135deg, #6c757d, #495057);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            color: #88c9bf;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--gray);
+        }
+
+        .developer-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .dev-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: rgba(42, 62, 60, 0.3);
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .dev-item:hover {
+            background: rgba(42, 62, 60, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Animation Elements */
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: scan 3s linear infinite;
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: particleMove 10s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes particleMove {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation" id="bgAnimation"></div>
+    <div class="scan-line"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+            <h1>Wa Support X</h1>
+            <div class="subtitle">DinoPy-Protocol • Advanced Report System</div>
+            <div class="version">Version 2.1</div>
+        </header>
+
+        <main>
+            <div class="main-layout">
+                <!-- Banned System -->
+                <div class="system-card banned">
+                    <h2><i class="fas fa-ban"></i> Banned System</h2>
+                    
+                    <div class="platform-selection">
+                        <label>Select Platform:</label>
+                        <div class="platform-buttons">
+                            <button class="platform-btn business" data-platform="business">
+                                <i class="fas fa-briefcase"></i>
+                                WhatsApp Business
+                            </button>
+                            <button class="platform-btn messenger" data-platform="messenger">
+                                <i class="fas fa-comment-alt"></i>
+                                WhatsApp Messenger
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Target Phone Number:</label>
+                        <div class="phone-input-container">
+                            <div class="country-code">+62</div>
+                            <input type="text" class="phone-input" id="bannedPhone" placeholder="8123456789" maxlength="12">
+                        </div>
+                    </div>
+
+                    <div class="report-selection">
+                        <label>Select Report Type:</label>
+                        <div class="report-grid" id="bannedReportsGrid">
+                            <!-- Banned reports will be generated here -->
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn-execute" id="executeBanned">
+                            <i class="fas fa-paper-plane"></i> Generate & Send Email
+                        </button>
+                        <button class="btn-preview" id="previewBanned">
+                            <i class="fas fa-eye"></i> Preview Email
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Unbanned System -->
+                <div class="system-card unbanned">
+                    <h2><i class="fas fa-unlock"></i> Unbanned System</h2>
+                    
+                    <div class="platform-selection">
+                        <label>Select Platform:</label>
+                        <div class="platform-buttons">
+                            <button class="platform-btn business" data-platform="business">
+                                <i class="fas fa-briefcase"></i>
+                                WhatsApp Business
+                            </button>
+                            <button class="platform-btn messenger" data-platform="messenger">
+                                <i class="fas fa-comment-alt"></i>
+                                WhatsApp Messenger
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Target Phone Number:</label>
+                        <div class="phone-input-container">
+                            <div class="country-code">+62</div>
+                            <input type="text" class="phone-input" id="unbannedPhone" placeholder="8123456789" maxlength="12">
+                        </div>
+                    </div>
+
+                    <div class="report-selection">
+                        <label>Select Appeal Type:</label>
+                        <div class="report-grid" id="unbannedReportsGrid">
+                            <!-- Unbanned reports will be generated here -->
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn-execute success" id="executeUnbanned">
+                            <i class="fas fa-key"></i> Generate & Send Appeal
+                        </button>
+                        <button class="btn-preview" id="previewUnbanned">
+                            <i class="fas fa-eye"></i> Preview Appeal
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Panel -->
+            <div class="status-panel">
+                <div class="status-header">
+                    <h3><i class="fas fa-server"></i> System Status Dashboard</h3>
+                    <div class="status-badge" id="systemStatus">OPERATIONAL</div>
+                </div>
+                
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span>Platform Selection</span>
+                        <span class="value active" id="platformStatus">READY</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Report Templates</span>
+                        <span class="value active">40 LOADED</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Email Generation</span>
+                        <span class="value active">AUTO</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Target Platform</span>
+                        <span class="value active" id="targetPlatform">-</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Selected Report</span>
+                        <span class="value active" id="selectedReport">-</span>
+                    </div>
+                    <div class="status-item">
+                        <span>System Security</span>
+                        <span class="value active">ENCRYPTED</span>
+                    </div>
+                </div>
+
+                <div class="log-console" id="logConsole">
+                    <div class="log-entry">System initialized...</div>
+                    <div class="log-entry">DinoPy-Protocol v2.1 loaded...</div>
+                    <div class="log-entry">40 report templates loaded (20 Banned + 20 Unbanned)...</div>
+                    <div class="log-entry">Select platform, enter phone number, and choose report type...</div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="developer-info">
+                <div class="dev-item">
+                    <i class="fas fa-code"></i>
+                    <span>Developer: DinoIjoNPC</span>
+                </div>
+                <div class="dev-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Contact: 6282351667537</span>
+                </div>
+                <div class="dev-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>System: SECURE & ENCRYPTED</span>
+                </div>
+            </div>
+            <p style="margin-top: 20px;">© 2024 Wa Support X. DinoPy-Protocol v2.1. Advanced Report System Active.</p>
+        </footer>
+    </div>
+
+    <!-- Email Modal -->
+    <div class="email-modal" id="emailModal">
+        <div class="email-content">
+            <div class="email-header">
+                <h3><i class="fas fa-envelope"></i> Email Preview</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="email-body" id="emailBody">
+                <!-- Email content will appear here -->
+            </div>
+            <div class="email-actions">
+                <button class="btn-send-email" id="sendEmail">
+                    <i class="fas fa-paper-plane"></i> Open in Email Client
+                </button>
+                <button class="btn-copy" id="copyEmail">
+                    <i class="fas fa-copy"></i> Copy Email
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // WhatsApp Support Emails
+        const SUPPORT_EMAILS = {
+            business: 'smb@support.whatsapp.com',
+            messenger: 'support@whatsapp.com'
+        };
+
+        // Banned Reports 1-20 (ENGLISH)
+        const BANNED_REPORTS = {
+            1: "This account +62{number} on WhatsApp {platform} is engaged in large-scale financial fraud operations targeting elderly citizens. The scam involves fake investment schemes promising 300% monthly returns, resulting in losses exceeding 2 billion rupiah for Indonesian victims.",
+            2: "Phone number +62{number} is distributing child exploitation material through WhatsApp {platform}. The account shares illegal content in encrypted groups and solicits inappropriate materials from minors, violating child protection laws.",
+            3: "Terrorism financing activities detected from +62{number} on WhatsApp {platform}. The account coordinates fundraising for extremist groups and spreads radical propaganda in violation of anti-terrorism regulations.",
+            4: "Account +62{number} operates as a drug trafficking hub on WhatsApp {platform}. Uses coded language and emojis to arrange narcotics sales across multiple Indonesian provinces.",
+            5: "Massive phishing campaign originating from +62{number} on WhatsApp {platform}. Impersonates bank officials to steal internet banking credentials, resulting in unauthorized transactions from victim accounts.",
+            6: "Human trafficking network using +62{number} on WhatsApp {platform} to recruit and transport victims under false employment promises. Connected to international smuggling rings.",
+            7: "Illegal gambling operation run through +62{number} on WhatsApp {platform}. Operates online casino and sports betting services in violation of Indonesian gambling laws.",
+            8: "Counterfeit document production service via +62{number} on WhatsApp {platform}. Sells fake passports, ID cards, and university diplomas with forged authenticity seals.",
+            9: "Money laundering scheme using +62{number} on WhatsApp {platform} to process illegal funds from cybercrime activities. Uses multiple mule accounts for fund transfers.",
+            10: "Impersonation scam: Number +62{number} pretends to be WhatsApp {platform} support staff, asking users for verification codes and taking over their accounts.",
+            11: "Fake charity organization using +62{number} on WhatsApp {platform} to collect donations for nonexistent disaster relief efforts. Preys on public sympathy.",
+            12: "Organ trafficking offers from +62{number} on WhatsApp {platform}. Advertises kidneys, livers, and corneas for sale using medical terminology to appear legitimate.",
+            13: "Malware distribution center via +62{number} on WhatsApp {platform}. Sends malicious APK files disguised as popular apps to steal personal and financial data.",
+            14: "Hate speech and ethnic violence incitement from +62{number} on WhatsApp {platform}. Spreads divisive content targeting specific religious and ethnic groups.",
+            15: "Fake job recruitment scam using +62{number} on WhatsApp {platform}. Collects application fees and personal data promising overseas employment that doesn't exist.",
+            16: "Illegal wildlife trade operated through +62{number} on WhatsApp {platform}. Sells protected species and animal parts in violation of conservation laws.",
+            17: "Credit card fraud operation using +62{number} on WhatsApp {platform}. Buys and sells stolen credit card information and provides carding tutorials.",
+            18: "Fake pandemic relief scam from +62{number} on WhatsApp {platform}. Claims to distribute government COVID-19 assistance in exchange for processing fees.",
+            19: "Academic fraud service via +62{number} on WhatsApp {platform}. Offers to write theses, dissertations, and take online exams for students.",
+            20: "Crypto investment scam using +62{number} on WhatsApp {platform}. Promises guaranteed returns on fake cryptocurrency investments, using Ponzi scheme structure."
+        };
+
+        // Unbanned Appeals 1-20 (ENGLISH)
+        const UNBANNED_APPEALS = {
+            1: "Business account appeal: Our legitimate company number +62{number} on WhatsApp {platform} was wrongfully banned. We hold valid business permits, tax certificates, and serve 5,000+ customers. This ban causes daily losses of 50 million rupiah.",
+            2: "Healthcare emergency appeal: Hospital contact number +62{number} on WhatsApp {platform} is critical for patient consultations and emergency coordination. The ban endangers lives and violates medical service protocols.",
+            3: "Educational institution appeal: School number +62{number} on WhatsApp {platform} coordinates parent-teacher communication for 2,000+ students. The ban disrupts academic activities and emergency notifications.",
+            4: "Government service appeal: Public service number +62{number} on WhatsApp {platform} distributes social assistance information to 10,000+ beneficiaries. The ban prevents aid from reaching impoverished communities.",
+            5: "Legal practice appeal: Law firm contact +62{number} on WhatsApp {platform} is essential for attorney-client privileged communication. The ban violates legal ethics and client confidentiality requirements.",
+            6: "Financial institution appeal: Bank customer service number +62{number} on WhatsApp {platform} handles fraud alerts and transaction verifications. The ban exposes customers to financial risks.",
+            7: "Non-profit organization appeal: Charity number +62{number} on WhatsApp {platform} coordinates disaster relief for earthquake victims. The ban hampers humanitarian aid distribution.",
+            8: "Transportation service appeal: Public transport number +62{number} on WhatsApp {platform} provides real-time schedule updates to 20,000+ daily commuters. The ban causes public inconvenience.",
+            9: "Utility provider appeal: Water company number +62{number} on WhatsApp {platform} reports outages and emergency repairs. The ban delays essential public service communications.",
+            10: "Agricultural cooperative appeal: Farmers' group number +62{number} on WhatsApp {platform} coordinates crop sales and receives weather alerts. The ban threatens food security.",
+            11: "Mental health service appeal: Crisis helpline +62{number} on WhatsApp {platform} provides suicide prevention counseling. The ban could cost lives of people in distress.",
+            12: "Disability support appeal: Special needs organization +62{number} on WhatsApp {platform} assists differently-abled individuals. The ban isolates vulnerable community members.",
+            13: "Journalism appeal: Press contact +62{number} on WhatsApp {platform} is used for verified news distribution. The ban hinders freedom of information and public interest reporting.",
+            14: "Academic research appeal: University study number +62{number} on WhatsApp {platform} collects approved public health research data. The ban disrupts important scientific work.",
+            15: "Legal aid appeal: Pro bono service number +62{number} on WhatsApp {platform} helps marginalized communities access justice. The ban denies legal assistance to the poor.",
+            16: "Environmental appeal: Conservation group number +62{number} on WhatsApp {platform} reports illegal logging activities. The ban hampers environmental protection efforts.",
+            17: "Elderly care appeal: Senior citizen support +62{number} on WhatsApp {platform} provides medication reminders. The ban isolates elderly individuals from essential care.",
+            18: "Refugee assistance appeal: Humanitarian organization +62{number} on WhatsApp {platform} coordinates aid for displaced persons following UN protocols.",
+            19: "Consumer protection appeal: Ombudsman number +62{number} on WhatsApp {platform} handles product safety reports as mandated by government regulations.",
+            20: "Religious institution appeal: Place of worship number +62{number} on WhatsApp {platform} coordinates community services and charitable activities for registered congregations."
+        };
+
+        // System State
+        let currentState = {
+            banned: {
+                platform: 'business',
+                phone: '',
+                report: '1'
+            },
+            unbanned: {
+                platform: 'business',
+                phone: '',
+                report: '1'
+            }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initBackgroundAnimation();
+            initReportButtons();
+            initPlatformButtons();
+            initPhoneInputs();
+            initEventListeners();
+            
+            addLog('Advanced Report System initialized', 'success');
+            addLog('Platform buttons: WhatsApp Business & Messenger', 'success');
+            addLog('Report selection: Banned 1-20 & Unbanned 1-20', 'success');
+            updateStatusDisplay();
+        });
+
+        // Initialize background animation
+        function initBackgroundAnimation() {
+            const bg = document.getElementById('bgAnimation');
+            for (let i = 0; i < 50; i++) {
+                const element = document.createElement('div');
+                element.classList.add('floating-element');
+                element.style.width = Math.random() * 100 + 50 + 'px';
+                element.style.height = element.style.width;
+                element.style.left = Math.random() * 100 + '%';
+                element.style.animationDelay = Math.random() * 15 + 's';
+                element.style.animationDuration = Math.random() * 30 + 20 + 's';
+                bg.appendChild(element);
+            }
+        }
+
+        // Initialize report buttons
+        function initReportButtons() {
+            const bannedGrid = document.getElementById('bannedReportsGrid');
+            const unbannedGrid = document.getElementById('unbannedReportsGrid');
+            
+            // Create Banned 1-20 buttons
+            for (let i = 1; i <= 20; i++) {
+                const btn = document.createElement('button');
+                btn.className = `report-btn banned ${i === 1 ? 'active' : ''}`;
+                btn.textContent = `Banned ${i}`;
+                btn.dataset.report = i;
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#bannedReportsGrid .report-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentState.banned.report = this.dataset.report;
+                    updateStatusDisplay();
+                    addLog(`Selected: Banned Report ${this.dataset.report}`, 'success');
+                });
+                bannedGrid.appendChild(btn);
+            }
+            
+            // Create Unbanned 1-20 buttons
+            for (let i = 1; i <= 20; i++) {
+                const btn = document.createElement('button');
+                btn.className = `report-btn unbanned ${i === 1 ? 'active' : ''}`;
+                btn.textContent = `Unbanned ${i}`;
+                btn.dataset.report = i;
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#unbannedReportsGrid .report-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentState.unbanned.report = this.dataset.report;
+                    updateStatusDisplay();
+                    addLog(`Selected: Unbanned Appeal ${this.dataset.report}`, 'success');
+                });
+                unbannedGrid.appendChild(btn);
+            }
+        }
+
+        // Initialize platform buttons
+        function initPlatformButtons() {
+            const platformBtns = document.querySelectorAll('.platform-btn');
+            
+            platformBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const isBanned = this.closest('.banned') !== null;
+                    const platform = this.dataset.platform;
+                    
+                    // Update active state
+                    const container = this.closest('.platform-buttons');
+                    container.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update state
+                    if (isBanned) {
+                        currentState.banned.platform = platform;
+                    } else {
+                        currentState.unbanned.platform = platform;
+                    }
+                    
+                    updateStatusDisplay();
+                    addLog(`Platform set: WhatsApp ${platform === 'business' ? 'Business' : 'Messenger'}`, 'success');
+                });
+            });
+            
+            // Set default active
+            document.querySelectorAll('.platform-btn[data-platform="business"]').forEach(btn => btn.classList.add('active'));
+        }
+
+        // Initialize phone inputs
+        function initPhoneInputs() {
+            document.getElementById('bannedPhone').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 12) value = value.substring(0, 12);
+                e.target.value = value;
+                currentState.banned.phone = value;
+                updateStatusDisplay();
+            });
+            
+            document.getElementById('unbannedPhone').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 12) value = value.substring(0, 12);
+                e.target.value = value;
+                currentState.unbanned.phone = value;
+                updateStatusDisplay();
+            });
+        }
+
+        // Initialize event listeners
+        function initEventListeners() {
+            // Banned execute
+            document.getElementById('executeBanned').addEventListener('click', () => {
+                handleExecute('banned');
+            });
+            
+            // Unbanned execute
+            document.getElementById('executeUnbanned').addEventListener('click', () => {
+                handleExecute('unbanned');
+            });
+            
+            // Preview buttons
+            document.getElementById('previewBanned').addEventListener('click', () => {
+                handlePreview('banned');
+            });
+            
+            document.getElementById('previewUnbanned').addEventListener('click', () => {
+                handlePreview('unbanned');
+            });
+            
+            // Modal controls
+            document.getElementById('closeModal').addEventListener('click', () => {
+                document.getElementById('emailModal').classList.remove('active');
+            });
+            
+            document.getElementById('sendEmail').addEventListener('click', sendEmail);
+            document.getElementById('copyEmail').addEventListener('click', copyEmail);
+            
+            // Close modal on background click
+            document.getElementById('emailModal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('emailModal')) {
+                    document.getElementById('emailModal').classList.remove('active');
+                }
+            });
+        }
+
+        // Handle execute
+        function handleExecute(type) {
+            const state = currentState[type];
+            
+            if (!state.phone || state.phone.length < 9) {
+                addLog(`ERROR: Please enter a valid phone number (minimum 9 digits after +62)`, 'error');
+                return;
+            }
+            
+            const emailContent = generateEmail(type, state.platform, state.phone, state.report);
+            const email = SUPPORT_EMAILS[state.platform];
+            const subject = type === 'banned' 
+                ? `URGENT: Violation Report for WhatsApp ${state.platform === 'business' ? 'Business' : 'Messenger'} Account +62${state.phone}`
+                : `Formal Appeal: Account Reinstatement Request for +62${state.phone}`;
+            
+            const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailContent)}`;
+            
+            window.open(mailtoLink, '_blank');
+            addLog(`${type === 'banned' ? 'Banned report' : 'Unbanned appeal'} generated for +62${state.phone}`, 'email');
+            addLog(`Opening email client for WhatsApp ${state.platform === 'business' ? 'Business' : 'Messenger'} Support`, 'success');
+            
+            // Update status
+            document.getElementById('emailQueue').textContent = 
+                parseInt(document.getElementById('emailQueue').textContent || '0') + 1;
+        }
+
+        // Handle preview
+        function handlePreview(type) {
+            const state = currentState[type];
+            
+            if (!state.phone || state.phone.length < 9) {
+                addLog(`ERROR: Please enter a valid phone number (minimum 9 digits after +62)`, 'error');
+                return;
+            }
+            
+            const emailContent = generateEmail(type, state.platform, state.phone, state.report);
+            document.getElementById('emailBody').textContent = emailContent;
+            document.getElementById('emailModal').classList.add('active');
+            
+            // Store current type for send/copy operations
+            document.getElementById('emailModal').dataset.currentType = type;
+            
+            addLog(`Preview generated for ${type === 'banned' ? 'Banned Report' : 'Unbanned Appeal'} ${state.report}`, 'email');
+        }
+
+        // Generate email content
+        function generateEmail(type, platform, phone, reportNumber) {
+            const template = type === 'banned' 
+                ? BANNED_REPORTS[reportNumber]
+                : UNBANNED_APPEALS[reportNumber];
+            
+            const platformText = platform === 'business' ? 'Business' : 'Messenger';
+            const reportType = type === 'banned' ? 'Terms of Service Violation Report' : 'Account Appeal Request';
+            
+            let content = template
+                .replace(/{number}/g, phone)
+                .replace(/{platform}/g, platformText);
+            
+            const fullEmail = `To: ${SUPPORT_EMAILS[platform]}
+Subject: ${type === 'banned' ? 'URGENT: ' : 'FORMAL APPEAL: '}${reportType} for WhatsApp Account +62${phone}
+
+Dear WhatsApp ${platformText} Support Team,
+
+${content}
+
+Account Information:
+- Reported Number: +62${phone}
+- WhatsApp Platform: ${platformText}
+- Report Type: ${reportType}
+- Report Reference: ${type.toUpperCase()}-${reportNumber}-${Date.now().toString().slice(-6)}
+- Date of Report: ${new Date().toLocaleDateString('en-US', { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+})}
+- Time: ${new Date().toLocaleTimeString('en-US', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    timeZoneName: 'short' 
+})}
+
+Verification Details:
+- Report Generated via: Wa Support X System
+- Protocol: DinoPy-Protocol v2.1
+- Security Level: Encrypted Transmission
+- Tracking ID: WSX-${Date.now()}-${Math.random().toString(36).substr(2, 8).toUpperCase()}
+
+Action Requested:
+${type === 'banned' 
+    ? 'Please investigate this account for Terms of Service violations and take appropriate action including permanent ban if violations are confirmed.'
+    : 'Please review this appeal and reinstate the account as it belongs to a legitimate user/business providing essential services.'
+}
+
+We trust you will handle this matter with the urgency and attention it requires according to WhatsApp's community standards and policies.
+
+Respectfully submitted,
+WhatsApp Support System User
+
+---
+This is an auto-generated report. Please do not reply to this email.
+For verification issues, contact system administrator.
+`;
+
+            return fullEmail;
+        }
+
+        // Send email
+        function sendEmail() {
+            const type = document.getElementById('emailModal').dataset.currentType;
+            const state = currentState[type];
+            const emailContent = generateEmail(type, state.platform, state.phone, state.report);
+            const email = SUPPORT_EMAILS[state.platform];
+            const subject = type === 'banned' 
+                ? `URGENT: Violation Report for WhatsApp ${state.platform === 'business' ? 'Business' : 'Messenger'} Account +62${state.phone}`
+                : `Formal Appeal: Account Reinstatement Request for +62${state.phone}`;
+            
+            const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailContent)}`;
+            window.open(mailtoLink, '_blank');
+            
+            document.getElementById('emailModal').classList.remove('active');
+            addLog(`Email client opened for ${type === 'banned' ? 'Banned Report' : 'Unbanned Appeal'}`, 'success');
+        }
+
+        // Copy email to clipboard
+        function copyEmail() {
+            const emailContent = document.getElementById('emailBody').textContent;
+            navigator.clipboard.writeText(emailContent).then(() => {
+                addLog('Email content copied to clipboard', 'success');
+                alert('Email content copied to clipboard!');
+            }).catch(err => {
+                addLog('Failed to copy email content', 'error');
+            });
+        }
+
+        // Update status display
+        function updateStatusDisplay() {
+            // Update target platform
+            const bannedPlatform = currentState.banned.platform === 'business' ? 'Business' : 'Messenger';
+            const unbannedPlatform = currentState.unbanned.platform === 'business' ? 'Business' : 'Messenger';
+            document.getElementById('targetPlatform').textContent = `${bannedPlatform} / ${unbannedPlatform}`;
+            
+            // Update selected report
+            document.getElementById('selectedReport').textContent = 
+                `B${currentState.banned.report} / U${currentState.unbanned.report}`;
+            
+            // Update platform status
+            const bannedPhone = currentState.banned.phone;
+            const unbannedPhone = currentState.unbanned.phone;
+            let status = 'READY';
+            
+            if (bannedPhone && bannedPhone.length >= 9) {
+                status = `B: +62${bannedPhone}`;
+            }
+            if (unbannedPhone && unbannedPhone.length >= 9) {
+                status += unbannedPhone ? ` | U: +62${unbannedPhone}` : '';
+            }
+            
+            document.getElementById('platformStatus').textContent = status;
+        }
+
+        // Log system
+        function addLog(message, type = 'info') {
+            const consoleEl = document.getElementById('logConsole');
+            const logEntry = document.createElement('div');
+            logEntry.classList.add('log-entry', type);
+            logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            consoleEl.appendChild(logEntry);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        // System status animation
+        setInterval(() => {
+            const statusEl = document.getElementById('systemStatus');
+            const statuses = ['OPERATIONAL', 'SECURE', 'ACTIVE', 'READY', 'ENCRYPTED'];
+            const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+            if (statusEl.textContent !== randomStatus) {
+                statusEl.textContent = randomStatus;
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
